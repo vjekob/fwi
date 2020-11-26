@@ -17,3 +17,7 @@ Enums are a nice AL type that should be used instead of options. Let's just make
 # ... and implementing interfaces with enums
 
 Enums are implicit factories. By binding interfaces to enums, we can simplify code by skipping factories.
+
+# Extending enum
+
+Here the enum is extended, and just like that more functionality is added to the application.

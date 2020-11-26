@@ -5,9 +5,9 @@ table 50100 "Demo Precondition"
 
     fields
     {
-        field(1; Code; Code[20])
+        field(1; Ordinal; Integer)
         {
-            Caption = 'Code';
+            Caption = 'Ordinal';
         }
 
         field(2; Description; Text[2048])
@@ -19,17 +19,38 @@ table 50100 "Demo Precondition"
         {
             Caption = 'Satisfied';
         }
-        field(4; Type; Enum "Demo Precondition Type")
+
+        field(4; Guid; Guid)
         {
-            Caption = 'Type';
+            Caption = 'Guid';
         }
     }
 
-    procedure Define(Code2: Code[20]; Description2: Text[2048]; Type2: Enum "Demo Precondition Type")
+    var
+        Ordinal: Integer;
+
+    procedure Discover(Description2: Text[2048]): Guid;
     begin
-        Rec.Code := Code2;
+        Ordinal += 1;
+        Rec.Ordinal := Ordinal;
         Rec.Description := Description2;
-        Rec.Type := Type2;
+        Rec.Guid := CreateGuid();
         Rec.Insert();
+        exit(Rec.Guid);
+    end;
+
+    procedure Check() Satisfied: Boolean;
+    begin
+        OnCheckPrecondition(Rec.Guid, Satisfied);
+    end;
+
+    [IntegrationEvent(true, false)]
+    procedure OnDiscoverPreconditions()
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnCheckPrecondition(Guid: Guid; var Satisfied: Boolean);
+    begin
     end;
 }

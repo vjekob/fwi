@@ -20,15 +20,11 @@ page 50100 "Demo Check Preconditions"
                 field(Satisfied; Rec.Satisfied)
                 {
                     trigger OnValidate();
-                    var
-                        Satisfy: Boolean;
-                        PrecondType: Interface "Demo IPrecondition";
                     begin
                         if not Rec.Satisfied then
                             exit;
 
-                        PrecondType := Rec.Type;
-                        if not PrecondType.Check() then
+                        if not Rec.Check() then
                             Error('');
                     end;
                 }
@@ -77,18 +73,12 @@ page 50100 "Demo Check Preconditions"
     end;
 
     procedure Check(NewAccount2: Interface "Demo INewAccount")
-    var
-        Source: Record "Demo Precondition" temporary;
     begin
         NewAccount := NewAccount2;
 
         Clear(Rec);
-        NewAccount2.GetPreconditions(Source);
-        if Source.FindSet() then
-            repeat
-                Rec := Source;
-                Rec.Insert();
-            until Source.Next = 0;
+        NewAccount2.ConfigurePreconditions();
+        Rec.OnDiscoverPreconditions();
 
         CurrPage.RunModal();
     end;

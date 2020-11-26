@@ -3,34 +3,21 @@ codeunit 50101 "Demo New Customer" implements "Demo INewAccount"
     EventSubscriberInstance = StaticAutomatic;
 
     var
-        ConstSolvency: Label 'CUST.1.SOLVENCY', Locked = true;
-        ConstKeyAcc: Label 'CUST.2.KEYACC', Locked = true;
-        ConstContract: Label 'CUST.3.CONTRACT', Locked = true;
         LabelSolvency: Label 'Solvency OK?';
         LabelKeyAcc: Label 'Key-Account manager selected?';
         LabelContract: Label 'Contract signed';
         ContractQuestion: Label 'Has contract been signed, countersigned, scanned, and archived?';
         KeyAccountQuestion: Label 'Who is the key account manager?';
+        SolvencyPrecondition: Interface "Demo IPrecondition";
+        KeyAccPrecondition: Interface "Demo IPrecondition";
+        ContractPrecondition: Interface "Demo IPrecondition";
 
-    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
+    internal procedure ConfigurePreconditions();
+    var
+        Factory: Codeunit "Demo Precondition Factory";
     begin
-        Precond.Define(ConstSolvency, LabelSolvency, Precond.Type::Click);
-        Precond.Define(ConstKeyAcc, LabelKeyAcc, Precond.Type::Question);
-        Precond.Define(ConstContract, LabelContract, Precond.Type::Confirm);
+        Factory.ClickPrecondition(LabelSolvency, SolvencyPrecondition);
+        Factory.QuestionPrecondition(LabelKeyAcc, KeyAccountQuestion, KeyAccPrecondition);
+        Factory.ConfirmPrecondition(LabelContract, ContractQuestion, ContractPrecondition);
     end;
-
-    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    // var
-    //     Input: Page "Demo Input Dialog";
-    //     KeyAccountManager: Text;
-    // begin
-    //     case Precondition of
-    //         ConstSolvency:
-    //             exit(true);
-    //         ConstContract:
-    //             exit(Confirm(ContractQuestion));
-    //         ConstKeyAcc:
-    //             exit(Input.AskForInput(KeyAccountQuestion, KeyAccountManager));
-    //     end;
-    // end;
 }

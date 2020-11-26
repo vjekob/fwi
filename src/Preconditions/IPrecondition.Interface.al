@@ -1,4 +1,4 @@
 interface "Demo IPrecondition"
 {
-    procedure Check(): Boolean;
+    procedure Initialize(Description2: Text);
 }

@@ -3,30 +3,20 @@ codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
     EventSubscriberInstance = StaticAutomatic;
 
     var
-        ConstAssortment: Label 'VEND.1.ASSORTMENT', Locked = true;
-        ConstPrices: Label 'VEND.2.PRICES', Locked = true;
-        ConstLegal: Label 'VEND.3.LEGAL', Locked = true;
         LabelAssortment: Label 'Assortment satisfies requirements?';
         LabelPrices: Label 'Prices and terms are acceptable?';
         LabelLegal: Label 'Legal review completed?';
         LegalQuestion: Label 'Has the vendor contract been reviewed and approved by the legal department?';
+        AssortmentPrecondition: Interface "Demo IPrecondition";
+        PricesPrecondition: Interface "Demo IPrecondition";
+        LegalPrecondition: Interface "Demo IPrecondition";
 
-    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
+    internal procedure ConfigurePreconditions();
+    var
+        Factory: Codeunit "Demo Precondition Factory";
     begin
-        Precond.Define(ConstAssortment, LabelAssortment, Precond.Type::Click);
-        Precond.Define(ConstPrices, LabelPrices, Precond.Type::Click);
-        Precond.Define(ConstLegal, LabelLegal, Precond.Type::Confirm);
+        Factory.ClickPrecondition(LabelAssortment, AssortmentPrecondition);
+        Factory.ClickPrecondition(LabelPrices, PricesPrecondition);
+        Factory.ConfirmPrecondition(LabelLegal, LegalQuestion, LegalPrecondition);
     end;
-
-    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    // begin
-    //     case Precondition of
-    //         ConstAssortment:
-    //             exit(true);
-    //         ConstPrices:
-    //             exit(true);
-    //         ConstLegal:
-    //             exit(Confirm(LegalQuestion));
-    //     end;
-    // end;
 }

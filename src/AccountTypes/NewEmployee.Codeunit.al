@@ -3,12 +3,6 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
     EventSubscriberInstance = StaticAutomatic;
 
     var
-        ConstCVOK: Label 'HR.1.CVOK', Locked = true;
-        ConstQualifications: Label 'HR.2.QUALIFIES', Locked = true;
-        ConstInterview1: Label 'HR.3.INTERVIEW1', Locked = true;
-        ConstTestCompleted: Label 'HR.4.TEST', Locked = true;
-        ConstInterview2: Label 'HR.5.INTERVIEW2', Locked = true;
-        ConstHRPaperworkCompleted: Label 'HR.6.PAPERWORK', Locked = true;
         LabelCVOK: Label 'CV is submitted and OK?';
         LabelQualifications: Label 'Meets job qualifications?';
         LabelInterview1: Label 'Passed first interview?';
@@ -18,35 +12,22 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
         QualificationsQuestion: Label 'Have qualifications been confirmed by the future direct superior?';
         TestScoreQuestion: Label 'What was the test score?';
         PaperworkQuestion: Label 'Has all paperwork been signed, countersigned, scanned, and archived?';
+        CVOKPrecondition: Interface "Demo IPrecondition";
+        QualificationsPrecondition: Interface "Demo IPrecondition";
+        Interview1Precondition: Interface "Demo IPrecondition";
+        TestCompletedPrecondition: Interface "Demo IPrecondition";
+        Interview2Precondition: Interface "Demo IPrecondition";
+        HRPaperworkCompletedPrecondition: Interface "Demo IPrecondition";
 
-    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
+    internal procedure ConfigurePreconditions();
+    var
+        Factory: Codeunit "Demo Precondition Factory";
     begin
-        Precond.Define(ConstCVOK, LabelCVOK, Precond.Type::Click);
-        Precond.Define(ConstQualifications, LabelQualifications, Precond.Type::Confirm);
-        Precond.Define(ConstInterview1, LabelInterview1, Precond.Type::Click);
-        Precond.Define(ConstTestCompleted, LabelTestCompleted, Precond.Type::Question);
-        Precond.Define(ConstInterview2, LabelInterview2, Precond.Type::Click);
-        Precond.Define(ConstHRPaperworkCompleted, LabelHRPaperworkCompleted, Precond.Type::Confirm);
+        Factory.ClickPrecondition(LabelCVOK, CVOKPrecondition);
+        Factory.ConfirmPrecondition(LabelQualifications, QualificationsQuestion, QualificationsPrecondition);
+        Factory.ClickPrecondition(LabelInterview1, Interview1Precondition);
+        Factory.QuestionPrecondition(LabelTestCompleted, TestScoreQuestion, TestCompletedPrecondition);
+        Factory.ClickPrecondition(LabelInterview2, Interview2Precondition);
+        Factory.ConfirmPrecondition(LabelHRPaperworkCompleted, PaperworkQuestion, HRPaperworkCompletedPrecondition);
     end;
-
-    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    // var
-    //     Input: Page "Demo Input Dialog";
-    //     TestScore: Text;
-    // begin
-    //     case Precondition of
-    //         ConstCVOK:
-    //             exit(true);
-    //         ConstQualifications:
-    //             exit(Confirm(QualificationsQuestion));
-    //         ConstInterview1:
-    //             exit(true);
-    //         ConstTestCompleted:
-    //             exit(Input.AskForInput(TestScoreQuestion, TestScore));
-    //         ConstInterview2:
-    //             exit(true);
-    //         ConstHRPaperworkCompleted:
-    //             exit(Confirm(PaperworkQuestion));
-    //     end;
-    // end;
 }

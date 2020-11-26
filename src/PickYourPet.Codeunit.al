@@ -11,17 +11,18 @@ codeunit 50103 "Demo Pick Your Pet"
 
     local procedure MakeSound(Pet: Option Unknown,Dog,Cat,Duck)
     var
-        Dog: Codeunit "Demo Dog";
-        Cat: Codeunit "Demo Cat";
-        Duck: Codeunit "Demo Duck";
+        PetFactory: Codeunit "Demo Pet Factory";
+        Animal: Interface "Demo IAnimal";
     begin
         case Pet of
             Pet::Dog:
-                Dog.MakeSound();
+                PetFactory.CreateDog(Animal);
             Pet::Cat:
-                Cat.MakeSound();
+                PetFactory.CreateCat(Animal);
             Pet::Duck:
-                Duck.MakeSound();
+                PetFactory.CreateDuck(Animal);
         end;
+
+        Animal.MakeSound();
     end;
 }

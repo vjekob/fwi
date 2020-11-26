@@ -3,11 +3,12 @@ codeunit 50100 "Demo New Account"
     trigger OnRun()
     var
         NewAccount: Interface "Demo INewAccount";
+        CheckPrecond: Page "Demo Check Preconditions";
     begin
         if not TryCreateNew(NewAccount) then
             exit;
 
-        NewAccount.CreateNew();
+        CheckPrecond.Check(NewAccount);
     end;
 
     [TryFunction]

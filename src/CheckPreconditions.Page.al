@@ -26,8 +26,7 @@ page 50100 "Demo Check Preconditions"
                         if not Rec.Satisfied then
                             exit;
 
-                        OnSatisfyPrecondition(Rec.Code, Satisfy);
-                        if not Satisfy then
+                        if not NewAccount.CheckPrecondition(Rec.Code) then
                             Error('');
                     end;
                 }
@@ -43,6 +42,7 @@ page 50100 "Demo Check Preconditions"
 
     var
         ErrorNotSatisfied: Label 'Please, either make sure all preconditions are satisfied, or click Cancel.';
+        NewAccount: Interface "Demo INewAccount";
 
     trigger OnOpenPage()
     begin
@@ -74,9 +74,14 @@ page 50100 "Demo Check Preconditions"
             Error(ErrorNotSatisfied);
     end;
 
-    procedure Check(var Source: Record "Demo Precondition" temporary)
+    procedure Check(NewAccount2: Interface "Demo INewAccount")
+    var
+        Source: Record "Demo Precondition" temporary;
     begin
+        NewAccount := NewAccount2;
+
         Clear(Rec);
+        NewAccount2.GetPreconditions(Source);
         if Source.FindSet() then
             repeat
                 Rec := Source;
@@ -84,10 +89,5 @@ page 50100 "Demo Check Preconditions"
             until Source.Next = 0;
 
         CurrPage.RunModal();
-    end;
-
-    [IntegrationEvent(false, false)]
-    local procedure OnSatisfyPrecondition(Precondition: Code[20]; var Satisfied: Boolean)
-    begin
     end;
 }

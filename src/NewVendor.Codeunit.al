@@ -11,28 +11,22 @@ codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
         LabelLegal: Label 'Legal review completed?';
         LegalQuestion: Label 'Has the vendor contract been reviewed and approved by the legal department?';
 
-    procedure CreateNew()
-    var
-        Precond: Record "Demo Precondition";
-        CheckPrecond: Page "Demo Check Preconditions";
+    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
         Precond.Define(ConstAssortment, LabelAssortment);
         Precond.Define(ConstPrices, LabelPrices);
         Precond.Define(ConstLegal, LabelLegal);
-
-        CheckPrecond.Check(Precond);
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Demo Check Preconditions", 'OnSatisfyPrecondition', '', false, false)]
-    local procedure SatisfyPrecondition(Precondition: Code[20]; var Satisfied: Boolean)
+    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
     begin
         case Precondition of
             ConstAssortment:
-                Satisfied := true;
+                exit(true);
             ConstPrices:
-                Satisfied := true;
+                exit(true);
             ConstLegal:
-                Satisfied := Confirm(LegalQuestion);
+                exit(Confirm(LegalQuestion));
         end;
     end;
 }

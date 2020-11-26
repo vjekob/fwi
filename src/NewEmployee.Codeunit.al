@@ -19,10 +19,7 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
         TestScoreQuestion: Label 'What was the test score?';
         PaperworkQuestion: Label 'Has all paperwork been signed, countersigned, scanned, and archived?';
 
-    procedure CreateNew()
-    var
-        Precond: Record "Demo Precondition";
-        CheckPrecond: Page "Demo Check Preconditions";
+    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
         Precond.Define(ConstCVOK, LabelCVOK);
         Precond.Define(ConstQualifications, LabelQualifications);
@@ -30,29 +27,26 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
         Precond.Define(ConstTestCompleted, LabelTestCompleted);
         Precond.Define(ConstInterview2, LabelInterview2);
         Precond.Define(ConstHRPaperworkCompleted, LabelHRPaperworkCompleted);
-
-        CheckPrecond.Check(Precond);
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Demo Check Preconditions", 'OnSatisfyPrecondition', '', false, false)]
-    local procedure SatisfyPrecondition(Precondition: Code[20]; var Satisfied: Boolean)
+    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
     var
         Input: Page "Demo Input Dialog";
         TestScore: Text;
     begin
         case Precondition of
             ConstCVOK:
-                Satisfied := true;
+                exit(true);
             ConstQualifications:
-                Satisfied := Confirm(QualificationsQuestion);
+                exit(Confirm(QualificationsQuestion));
             ConstInterview1:
-                Satisfied := true;
+                exit(true);
             ConstTestCompleted:
-                Satisfied := Input.AskForInput(TestScoreQuestion, TestScore);
+                exit(Input.AskForInput(TestScoreQuestion, TestScore));
             ConstInterview2:
-                Satisfied := true;
+                exit(true);
             ConstHRPaperworkCompleted:
-                Satisfied := Confirm(PaperworkQuestion);
+                exit(Confirm(PaperworkQuestion));
         end;
     end;
 }

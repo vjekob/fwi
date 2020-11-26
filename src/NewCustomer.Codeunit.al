@@ -12,31 +12,25 @@ codeunit 50101 "Demo New Customer" implements "Demo INewAccount"
         ContractQuestion: Label 'Has contract been signed, countersigned, scanned, and archived?';
         KeyAccountQuestion: Label 'Who is the key account manager?';
 
-    procedure CreateNew()
-    var
-        Precond: Record "Demo Precondition";
-        CheckPrecond: Page "Demo Check Preconditions";
+    internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
         Precond.Define(ConstSolvency, LabelSolvency);
         Precond.Define(ConstKeyAcc, LabelKeyAcc);
         Precond.Define(ConstContract, LabelContract);
-
-        CheckPrecond.Check(Precond);
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Demo Check Preconditions", 'OnSatisfyPrecondition', '', false, false)]
-    local procedure SatisfyPrecondition(Precondition: Code[20]; var Satisfied: Boolean)
+    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
     var
         Input: Page "Demo Input Dialog";
         KeyAccountManager: Text;
     begin
         case Precondition of
             ConstSolvency:
-                Satisfied := true;
+                exit(true);
             ConstContract:
-                Satisfied := Confirm(ContractQuestion);
+                exit(Confirm(ContractQuestion));
             ConstKeyAcc:
-                Satisfied := Input.AskForInput(KeyAccountQuestion, KeyAccountManager);
+                exit(Input.AskForInput(KeyAccountQuestion, KeyAccountManager));
         end;
     end;
 }

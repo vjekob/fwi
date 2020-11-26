@@ -11,3 +11,11 @@ The first polymorphic candidate is the type of new account that can be created. 
 # Enums
 
 This demo uses enums to address polymorphism.
+
+# Improving reusability
+
+There is boilerplate code in all `New_XYZ_.Codeunit.al` codeunits. That code is now moved into `NewAccount.Codeunit.al`.
+
+# Improving loose binding
+
+There is no event-driven binding between page and codeunits. It's not explicit through the interface. Also, there is no more back-door for event hijacking.

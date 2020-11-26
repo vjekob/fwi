@@ -1,4 +1,5 @@
 interface "Demo INewAccount"
 {
-    procedure CreateNew();
+    procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
+    procedure CheckPrecondition(Precondition: Code[20]): Boolean;
 }

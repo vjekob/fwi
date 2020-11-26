@@ -31,3 +31,7 @@ However, this exposes one major drawback of static enum-bound interface implemen
 # Discovery factory
 
 Discovery works nicely with interfaces because interfaces can be assigned to discovery parameters. This allows replacing the initial `StrMenu` with hardcoded account types with discovery process for account types.
+
+# Adding more functionality through interfaces
+
+This demo shows how easy it is to add new functionality through interfaces.

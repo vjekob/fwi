@@ -9,3 +9,7 @@ All animals can make a sound, and business logic doesn't care how they do. Here,
 # Problem with uninitialized interfaces
 
 AL cannot check if an interface is initialized. Attempting to access uninitialized interface causes runtime error.
+
+# Introducing enums
+
+Enums are a nice AL type that should be used instead of options. Let's just make this small change.

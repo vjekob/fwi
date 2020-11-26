@@ -1,12 +1,15 @@
-enum 50100 "Demo Animal Type"
+enum 50100 "Demo Animal Type" implements "Demo IAnimal"
 {
     value(1; Dog)
     {
+        Implementation = "Demo IAnimal" = "Demo Dog";
     }
     value(2; Cat)
     {
+        Implementation = "Demo IAnimal" = "Demo Cat";
     }
     value(3; Duck)
     {
+        Implementation = "Demo IAnimal" = "Demo Duck";
     }
 }

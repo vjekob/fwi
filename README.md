@@ -13,3 +13,7 @@ AL cannot check if an interface is initialized. Attempting to access uninitializ
 # Introducing enums
 
 Enums are a nice AL type that should be used instead of options. Let's just make this small change.
+
+# ... and implementing interfaces with enums
+
+Enums are implicit factories. By binding interfaces to enums, we can simplify code by skipping factories.

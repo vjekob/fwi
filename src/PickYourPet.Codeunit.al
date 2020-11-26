@@ -17,20 +17,8 @@ codeunit 50103 "Demo Pick Your Pet"
         MakeSound(AnimalType);
     end;
 
-    local procedure MakeSound(Pet: Enum "Demo Animal Type")
-    var
-        PetFactory: Codeunit "Demo Pet Factory";
-        Animal: Interface "Demo IAnimal";
+    local procedure MakeSound(Animal: Interface "Demo IAnimal")
     begin
-        case Pet of
-            Pet::Dog:
-                PetFactory.CreateDog(Animal);
-            Pet::Cat:
-                PetFactory.CreateCat(Animal);
-            Pet::Duck:
-                PetFactory.CreateDuck(Animal);
-        end;
-
         Animal.MakeSound();
     end;
 }

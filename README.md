@@ -17,3 +17,7 @@ Enums are a nice AL type that should be used instead of options. Let's just make
 # ... and implementing interfaces with enums
 
 Enums are implicit factories. By binding interfaces to enums, we can simplify code by skipping factories.
+
+# Further improvement
+
+Replacing `StrMenu` with a page that presents the enum. Also, making enum extensible.

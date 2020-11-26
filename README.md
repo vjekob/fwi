@@ -27,3 +27,7 @@ What else can be a good candidate for interfaces? Where do we have a `case` stat
 This can be handled with a new interface: `IPrecondition`.
 
 However, this exposes one major drawback of static enum-bound interface implementations: it's not possible to control instance context.
+
+# Discovery factory
+
+Discovery works nicely with interfaces because interfaces can be assigned to discovery parameters. This allows replacing the initial `StrMenu` with hardcoded account types with discovery process for account types.

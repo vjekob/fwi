@@ -10,6 +10,7 @@ codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
         AssortmentPrecondition: Interface "Demo IPrecondition";
         PricesPrecondition: Interface "Demo IPrecondition";
         LegalPrecondition: Interface "Demo IPrecondition";
+        ThisGuid: Label 'e28bdd50-e314-497b-b921-1724a8fc2a79', Locked = true;
 
     internal procedure ConfigurePreconditions();
     var
@@ -18,5 +19,25 @@ codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
         Factory.ClickPrecondition(LabelAssortment, AssortmentPrecondition);
         Factory.ClickPrecondition(LabelPrices, PricesPrecondition);
         Factory.ConfirmPrecondition(LabelLegal, LegalQuestion, LegalPrecondition);
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Demo New Account Type", 'OnDiscoverAccountTypes', '', false, false)]
+    local procedure DiscoverAccountType(var sender: Record "Demo New Account Type")
+    var
+        Vend: Record Vendor;
+    begin
+        sender.Discover(ThisGuid, Vend.TableCaption);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Demo New Account", 'OnMapAccountTypeGuidToImplementation', '', false, false)]
+    local procedure MapAccountTypeGuidToImplementation(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
+    var
+        ThisCodeunit: Codeunit "Demo New Vendor";
+    begin
+        if ThisGuid <> Guid then
+            exit;
+
+        Handled := true;
+        NewAccount := ThisCodeunit;
     end;
 }

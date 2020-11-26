@@ -18,6 +18,7 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
         TestCompletedPrecondition: Interface "Demo IPrecondition";
         Interview2Precondition: Interface "Demo IPrecondition";
         HRPaperworkCompletedPrecondition: Interface "Demo IPrecondition";
+        ThisGuid: Label '61b51c5c-a0b7-45e1-91be-85f03f952207', Locked = true;
 
     internal procedure ConfigurePreconditions();
     var
@@ -29,5 +30,25 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
         Factory.QuestionPrecondition(LabelTestCompleted, TestScoreQuestion, TestCompletedPrecondition);
         Factory.ClickPrecondition(LabelInterview2, Interview2Precondition);
         Factory.ConfirmPrecondition(LabelHRPaperworkCompleted, PaperworkQuestion, HRPaperworkCompletedPrecondition);
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Demo New Account Type", 'OnDiscoverAccountTypes', '', false, false)]
+    local procedure DiscoverAccountType(var sender: Record "Demo New Account Type")
+    var
+        Employee: Record Employee;
+    begin
+        sender.Discover(ThisGuid, Employee.TableCaption);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Demo New Account", 'OnMapAccountTypeGuidToImplementation', '', false, false)]
+    local procedure MapAccountTypeGuidToImplementation(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
+    var
+        ThisCodeunit: Codeunit "Demo New Employee";
+    begin
+        if ThisGuid <> Guid then
+            exit;
+
+        Handled := true;
+        NewAccount := ThisCodeunit;
     end;
 }

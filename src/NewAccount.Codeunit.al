@@ -2,21 +2,21 @@ codeunit 50100 "Demo New Account"
 {
     trigger OnRun()
     var
+        ChooseAccountType: Page "Demo Choose Account Type";
+        Guid: Guid;
+        Handled: Boolean;
         NewAccount: Interface "Demo INewAccount";
         CheckPrecond: Page "Demo Check Preconditions";
     begin
-        if not TryCreateNew(NewAccount) then
-            exit;
-
-        CheckPrecond.Check(NewAccount);
+        if ChooseAccountType.Check(Guid) then begin
+            OnMapAccountTypeGuidToImplementation(Guid, NewAccount, Handled);
+            if Handled then
+                CheckPrecond.Check(NewAccount);
+        end;
     end;
 
-    [TryFunction]
-    local procedure TryCreateNew(var NewAccount: Interface "Demo INewAccount")
-    var
-        Question: Label 'What would you like to create?';
-        Options: Label 'Customer,Vendor,Employee';
+    [IntegrationEvent(false, false)]
+    local procedure OnMapAccountTypeGuidToImplementation(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
     begin
-        NewAccount := Enum::"Demo Account Type".FromInteger(StrMenu(Options, 0, Question));
     end;
 }

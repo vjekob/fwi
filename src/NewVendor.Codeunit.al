@@ -1,4 +1,4 @@
-codeunit 50102 "Demo New Vendor"
+codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
 {
     EventSubscriberInstance = StaticAutomatic;
 
@@ -11,7 +11,7 @@ codeunit 50102 "Demo New Vendor"
         LabelLegal: Label 'Legal review completed?';
         LegalQuestion: Label 'Has the vendor contract been reviewed and approved by the legal department?';
 
-    trigger OnRun()
+    procedure CreateNew()
     var
         Precond: Record "Demo Precondition";
         CheckPrecond: Page "Demo Check Preconditions";

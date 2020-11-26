@@ -1,4 +1,4 @@
-codeunit 50103 "Demo New Employee"
+codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
 {
     EventSubscriberInstance = StaticAutomatic;
 
@@ -19,7 +19,7 @@ codeunit 50103 "Demo New Employee"
         TestScoreQuestion: Label 'What was the test score?';
         PaperworkQuestion: Label 'Has all paperwork been signed, countersigned, scanned, and archived?';
 
-    trigger OnRun()
+    procedure CreateNew()
     var
         Precond: Record "Demo Precondition";
         CheckPrecond: Page "Demo Check Preconditions";

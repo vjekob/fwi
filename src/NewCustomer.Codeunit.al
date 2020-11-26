@@ -1,4 +1,4 @@
-codeunit 50101 "Demo New Customer"
+codeunit 50101 "Demo New Customer" implements "Demo INewAccount"
 {
     EventSubscriberInstance = StaticAutomatic;
 
@@ -12,7 +12,7 @@ codeunit 50101 "Demo New Customer"
         ContractQuestion: Label 'Has contract been signed, countersigned, scanned, and archived?';
         KeyAccountQuestion: Label 'Who is the key account manager?';
 
-    trigger OnRun()
+    procedure CreateNew()
     var
         Precond: Record "Demo Precondition";
         CheckPrecond: Page "Demo Check Preconditions";

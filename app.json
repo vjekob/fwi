@@ -1,6 +1,6 @@
 {
-  "id": "455223d0-24ab-458d-8b9a-4b0ef70f2437",
-  "name": "FunWithInterfaces",
+  "id": "b376fefc-e1e7-4f44-8301-26bd37d817c9",
+  "name": "FunWithInterfaces (Adding implementation)",
   "publisher": "Default publisher",
   "version": "1.0.0.0",
   "brief": "",
@@ -12,8 +12,8 @@
   "logo": "",
   "dependencies": [],
   "screenshots": [],
-  "platform": "16.0.0.0",
-  "application": "16.0.0.0",
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
   "idRanges": [
     {
       "from": 50100,
@@ -22,5 +22,5 @@
   ],
   "contextSensitiveHelpUrl": "https://FunWithInterfaces.com/help/",
   "showMyCode": true,
-  "runtime": "5.0"
+  "runtime": "6.0"
 }

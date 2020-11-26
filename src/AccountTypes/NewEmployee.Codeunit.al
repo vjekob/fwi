@@ -21,32 +21,32 @@ codeunit 50103 "Demo New Employee" implements "Demo INewAccount"
 
     internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
-        Precond.Define(ConstCVOK, LabelCVOK);
-        Precond.Define(ConstQualifications, LabelQualifications);
-        Precond.Define(ConstInterview1, LabelInterview1);
-        Precond.Define(ConstTestCompleted, LabelTestCompleted);
-        Precond.Define(ConstInterview2, LabelInterview2);
-        Precond.Define(ConstHRPaperworkCompleted, LabelHRPaperworkCompleted);
+        Precond.Define(ConstCVOK, LabelCVOK, Precond.Type::Click);
+        Precond.Define(ConstQualifications, LabelQualifications, Precond.Type::Confirm);
+        Precond.Define(ConstInterview1, LabelInterview1, Precond.Type::Click);
+        Precond.Define(ConstTestCompleted, LabelTestCompleted, Precond.Type::Question);
+        Precond.Define(ConstInterview2, LabelInterview2, Precond.Type::Click);
+        Precond.Define(ConstHRPaperworkCompleted, LabelHRPaperworkCompleted, Precond.Type::Confirm);
     end;
 
-    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    var
-        Input: Page "Demo Input Dialog";
-        TestScore: Text;
-    begin
-        case Precondition of
-            ConstCVOK:
-                exit(true);
-            ConstQualifications:
-                exit(Confirm(QualificationsQuestion));
-            ConstInterview1:
-                exit(true);
-            ConstTestCompleted:
-                exit(Input.AskForInput(TestScoreQuestion, TestScore));
-            ConstInterview2:
-                exit(true);
-            ConstHRPaperworkCompleted:
-                exit(Confirm(PaperworkQuestion));
-        end;
-    end;
+    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
+    // var
+    //     Input: Page "Demo Input Dialog";
+    //     TestScore: Text;
+    // begin
+    //     case Precondition of
+    //         ConstCVOK:
+    //             exit(true);
+    //         ConstQualifications:
+    //             exit(Confirm(QualificationsQuestion));
+    //         ConstInterview1:
+    //             exit(true);
+    //         ConstTestCompleted:
+    //             exit(Input.AskForInput(TestScoreQuestion, TestScore));
+    //         ConstInterview2:
+    //             exit(true);
+    //         ConstHRPaperworkCompleted:
+    //             exit(Confirm(PaperworkQuestion));
+    //     end;
+    // end;
 }

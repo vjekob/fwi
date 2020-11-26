@@ -19,3 +19,11 @@ There is boilerplate code in all `New_XYZ_.Codeunit.al` codeunits. That code is 
 # Improving loose binding
 
 There is no event-driven binding between page and codeunits. It's not explicit through the interface. Also, there is no more back-door for event hijacking.
+
+# More interfaces
+
+What else can be a good candidate for interfaces? Where do we have a `case` statement? Correct: all of the `New_XYZ_.codeunit.al` inside the `CheckPrecondition` function.
+
+This can be handled with a new interface: `IPrecondition`.
+
+However, this exposes one major drawback of static enum-bound interface implementations: it's not possible to control instance context.

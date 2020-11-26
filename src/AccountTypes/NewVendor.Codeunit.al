@@ -13,20 +13,20 @@ codeunit 50102 "Demo New Vendor" implements "Demo INewAccount"
 
     internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
-        Precond.Define(ConstAssortment, LabelAssortment);
-        Precond.Define(ConstPrices, LabelPrices);
-        Precond.Define(ConstLegal, LabelLegal);
+        Precond.Define(ConstAssortment, LabelAssortment, Precond.Type::Click);
+        Precond.Define(ConstPrices, LabelPrices, Precond.Type::Click);
+        Precond.Define(ConstLegal, LabelLegal, Precond.Type::Confirm);
     end;
 
-    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    begin
-        case Precondition of
-            ConstAssortment:
-                exit(true);
-            ConstPrices:
-                exit(true);
-            ConstLegal:
-                exit(Confirm(LegalQuestion));
-        end;
-    end;
+    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
+    // begin
+    //     case Precondition of
+    //         ConstAssortment:
+    //             exit(true);
+    //         ConstPrices:
+    //             exit(true);
+    //         ConstLegal:
+    //             exit(Confirm(LegalQuestion));
+    //     end;
+    // end;
 }

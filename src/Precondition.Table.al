@@ -19,12 +19,17 @@ table 50100 "Demo Precondition"
         {
             Caption = 'Satisfied';
         }
+        field(4; Type; Enum "Demo Precondition Type")
+        {
+            Caption = 'Type';
+        }
     }
 
-    procedure Define(Code2: Code[20]; Description2: Text[2048])
+    procedure Define(Code2: Code[20]; Description2: Text[2048]; Type2: Enum "Demo Precondition Type")
     begin
         Rec.Code := Code2;
         Rec.Description := Description2;
+        Rec.Type := Type2;
         Rec.Insert();
     end;
 }

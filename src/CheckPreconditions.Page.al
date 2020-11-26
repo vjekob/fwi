@@ -22,11 +22,13 @@ page 50100 "Demo Check Preconditions"
                     trigger OnValidate();
                     var
                         Satisfy: Boolean;
+                        PrecondType: Interface "Demo IPrecondition";
                     begin
                         if not Rec.Satisfied then
                             exit;
 
-                        if not NewAccount.CheckPrecondition(Rec.Code) then
+                        PrecondType := Rec.Type;
+                        if not PrecondType.Check() then
                             Error('');
                     end;
                 }

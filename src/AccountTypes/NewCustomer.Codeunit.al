@@ -14,23 +14,23 @@ codeunit 50101 "Demo New Customer" implements "Demo INewAccount"
 
     internal procedure GetPreconditions(var Precond: Record "Demo Precondition" temporary);
     begin
-        Precond.Define(ConstSolvency, LabelSolvency);
-        Precond.Define(ConstKeyAcc, LabelKeyAcc);
-        Precond.Define(ConstContract, LabelContract);
+        Precond.Define(ConstSolvency, LabelSolvency, Precond.Type::Click);
+        Precond.Define(ConstKeyAcc, LabelKeyAcc, Precond.Type::Question);
+        Precond.Define(ConstContract, LabelContract, Precond.Type::Confirm);
     end;
 
-    internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
-    var
-        Input: Page "Demo Input Dialog";
-        KeyAccountManager: Text;
-    begin
-        case Precondition of
-            ConstSolvency:
-                exit(true);
-            ConstContract:
-                exit(Confirm(ContractQuestion));
-            ConstKeyAcc:
-                exit(Input.AskForInput(KeyAccountQuestion, KeyAccountManager));
-        end;
-    end;
+    // internal procedure CheckPrecondition(Precondition: Code[20]): Boolean;
+    // var
+    //     Input: Page "Demo Input Dialog";
+    //     KeyAccountManager: Text;
+    // begin
+    //     case Precondition of
+    //         ConstSolvency:
+    //             exit(true);
+    //         ConstContract:
+    //             exit(Confirm(ContractQuestion));
+    //         ConstKeyAcc:
+    //             exit(Input.AskForInput(KeyAccountQuestion, KeyAccountManager));
+    //     end;
+    // end;
 }

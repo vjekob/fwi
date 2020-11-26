@@ -1,0 +1,26 @@
+{
+  "id": "455223d0-24ab-458d-8b9a-4b0ef70f2437",
+  "name": "FunWithInterfaces",
+  "publisher": "Default publisher",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "16.0.0.0",
+  "application": "16.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://FunWithInterfaces.com/help/",
+  "showMyCode": true,
+  "runtime": "5.0"
+}

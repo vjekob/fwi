@@ -1,6 +1,6 @@
 {
-  "id": "455223d0-24ab-458d-8b9a-4b0ef70f2437",
-  "name": "FunWithInterfaces",
+  "id": "ef30ac19-ae8d-4acf-87b3-d7babac4f555",
+  "name": "FunWithInterfaces (Dependency)",
   "publisher": "Default publisher",
   "version": "1.0.0.0",
   "brief": "",
@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "455223d0-24ab-458d-8b9a-4b0ef70f2437",
+      "name": "FunWithInterfaces",
+      "publisher": "Default publisher",
+      "version": "1.0.0.0"
+    }
+  ],
   "screenshots": [],
   "platform": "17.0.0.0",
   "application": "17.0.0.0",

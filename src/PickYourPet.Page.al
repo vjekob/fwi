@@ -1,6 +1,6 @@
 page 50100 "Demo Pick Your Pet"
 {
-    PageType = ConfirmationDialog;
+    PageType = StandardDialog;
     Caption = 'Pick your pet';
 
     layout

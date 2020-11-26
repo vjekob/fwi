@@ -31,7 +31,3 @@ However, this exposes one major drawback of static enum-bound interface implemen
 # Discovery factory
 
 Discovery works nicely with interfaces because interfaces can be assigned to discovery parameters. This allows replacing the initial `StrMenu` with hardcoded account types with discovery process for account types.
-
-# Adding a new account type with new precondition options
-
-Let's see how easy it is to add a completely new account type with completely new precondition checking behavior.

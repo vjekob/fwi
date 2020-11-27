@@ -1,4 +1,4 @@
-codeunit 50104 "Demo Dummy Satisfier"
+codeunit 50104 "Demo Rogue Subscriber"
 {
     EventSubscriberInstance = StaticAutomatic;
 

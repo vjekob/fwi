@@ -10,8 +10,8 @@ codeunit 50103 "Demo Pick Your Pet"
             MakeSound(AnimalType);
     end;
 
-    local procedure MakeSound(Animal: Interface "Demo IAnimal")
+    local procedure MakeSound(Pet: Interface "Demo IAnimal")
     begin
-        Animal.MakeSound();
+        Pet.MakeSound();
     end;
 }

@@ -6,31 +6,22 @@ codeunit 50103 "Demo Pick Your Pet"
 
     trigger OnRun()
     var
-        AnimalType: Enum "Demo Animal Type";
+        PetFactory: Codeunit "Demo Pet Factory";
+        PetType: Enum "Demo Animal Type";
+        Pet: Interface "Demo IAnimal";
         Selection: Integer;
     begin
         Selection := StrMenu(Options, 0, Caption);
         if Selection = 0 then
             exit;
 
-        AnimalType := Enum::"Demo Animal Type".FromInteger(Selection);
-        MakeSound(AnimalType);
+        PetType := Enum::"Demo Animal Type".FromInteger(Selection);
+        PetFactory.CreatePet(PetType, Pet);
+        MakeSound(Pet);
     end;
 
-    local procedure MakeSound(Pet: Enum "Demo Animal Type")
-    var
-        PetFactory: Codeunit "Demo Pet Factory";
-        Animal: Interface "Demo IAnimal";
+    local procedure MakeSound(Pet: Interface "Demo IAnimal")
     begin
-        case Pet of
-            Pet::Dog:
-                PetFactory.CreateDog(Animal);
-            Pet::Cat:
-                PetFactory.CreateCat(Animal);
-            Pet::Duck:
-                PetFactory.CreateDuck(Animal);
-        end;
-
-        Animal.MakeSound();
+        Pet.MakeSound();
     end;
 }

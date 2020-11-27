@@ -17,11 +17,11 @@ codeunit 50103 "Demo Pick Your Pet"
     begin
         case Pet of
             Pet::Dog:
-                Dog.MakeSound();
+                Dog.Woof();
             Pet::Cat:
-                Cat.MakeSound();
+                Cat.Meow();
             Pet::Duck:
-                Duck.MakeSound();
+                Duck.Quack();
         end;
     end;
 }

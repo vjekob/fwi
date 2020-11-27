@@ -1,6 +1,6 @@
 codeunit 50102 "Demo Duck"
 {
-    procedure MakeSound()
+    procedure Quack()
     begin
         Message('Quack!');
     end;

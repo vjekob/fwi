@@ -1,6 +1,6 @@
 codeunit 50101 "Demo Cat"
 {
-    procedure MakeSound()
+    procedure Meow()
     begin
         Message('Meow!');
     end;

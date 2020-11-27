@@ -9,14 +9,14 @@ codeunit 50100 "Demo New Account"
         CheckPrecond: Page "Demo Check Preconditions";
     begin
         if ChooseAccountType.Check(Guid) then begin
-            OnMapAccountTypeGuidToImplementation(Guid, NewAccount, Handled);
+            OnAccountTypeFactoryMethod(Guid, NewAccount, Handled);
             if Handled then
                 CheckPrecond.Check(NewAccount);
         end;
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnMapAccountTypeGuidToImplementation(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
+    local procedure OnAccountTypeFactoryMethod(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
     begin
     end;
 }

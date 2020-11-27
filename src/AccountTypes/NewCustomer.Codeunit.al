@@ -30,8 +30,8 @@ codeunit 50101 "Demo New Customer" implements "Demo INewAccount"
         sender.Discover(ThisGuid, Cust.TableCaption);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Demo New Account", 'OnMapAccountTypeGuidToImplementation', '', false, false)]
-    local procedure MapAccountTypeGuidToImplementation(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Demo New Account", 'OnAccountTypeFactoryMethod', '', false, false)]
+    local procedure AccountTypeFactoryMethod(Guid: Guid; var NewAccount: Interface "Demo INewAccount"; var Handled: Boolean)
     var
         ThisCodeunit: Codeunit "Demo New Customer";
     begin

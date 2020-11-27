@@ -7,7 +7,6 @@ codeunit 50103 "Demo Pick Your Pet"
     trigger OnRun()
     var
         PetType: Enum "Demo Animal Type";
-        Pet: Interface "Demo IAnimal";
         Selection: Integer;
     begin
         Selection := StrMenu(Options, 0, Caption);
